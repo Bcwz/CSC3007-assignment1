@@ -13,36 +13,51 @@
             let response = await fetch(URL);
             let data = await response.json();
             console.log(data)
-            let psiReadings = data.items[0].readings 
-            for(let x in psiReadings){
-                console.log(x)
+            let psiMetric = data.items[0].readings
+            let headerValues = data.region_metadata
+            //console.log(Object.keys(metricValues[0]))
+            //console.log(headerValues[0]["name"])
+            let metricReadings = JSON.parse(JSON.stringify(psiMetric))
+            //console.log(metricReadings)
+            
+            for (x in headerValues){
+              var newCol = document.createElement("th");
+              var newRow = document.createElement("tr");
+              newCol.innerHTML = headerValues[x]["name"];
+
+              document.getElementById("psi_header").appendChild(newCol);
             };
-            }
+            for(let x in psiMetric){
+                //console.log(metricReadings[x])
+                var newCol = document.createElement("th");
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");               
+                newCell.innerHTML = x;
+                newRow.append(newCell);   
+                for (metric in metricReadings){
+                  //console.log(metricReadings[metric]);
+                  for (value in metricReadings[metric]){
+                    // newCell.innerHTML = metricReadings[metric][value];
+                    // newRow.append(newCell);
+                    // console.log(metricReadings[metric][value]);
+                  };                              
+                  };
+                  document.getElementById("index_row").appendChild(newRow);
+                };                            
+                
+            };
+            
             
     </script>
     <table class="table table-striped table-bordered" id="psi_table">
         <thead>
-
-          <tr>
+          <tr id="psi_header">
             <th scope="col">Metric</th>
-            <th scope="col">National</th>
-            <th scope="col">Central</th>
-            <th scope="col">West</th>
-            <th scope="col">East</th>
-            <th scope="col">North</th>
-            <th scope="col">South</th>
           </tr>
-
+          
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-
-        </tbody>
+        <tbody id="index_row"> </tbody>
+        
       </table>
 </body>
 </html>
