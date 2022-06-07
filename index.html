@@ -13,12 +13,14 @@
             let response = await fetch(URL);
             let data = await response.json();
             console.log(data)
+            let dateTime = data.items[0].timestamp
             let psiMetric = data.items[0].readings
             let headerValues = data.region_metadata
             //console.log(Object.keys(metricValues[0]))
             //console.log(headerValues[0]["name"])
             let metricReadings = JSON.parse(JSON.stringify(psiMetric))
-            //console.log(metricReadings)
+            //console.log(new Date(dateTime))
+            document.getElementById("timestamp").append("Last updated: " + new Date(dateTime));
             
             for (x in headerValues){
               var newCol = document.createElement("th");
@@ -51,6 +53,9 @@
     </script>
     <table class="table table-striped table-bordered" id="psi_table">
         <thead>
+          <div class="heading" style="text-align: center;">
+            <h3 id="timestamp"></h3>
+          </div>
           <tr id="psi_header">
             <th scope="col">Metric</th>
           </tr>
