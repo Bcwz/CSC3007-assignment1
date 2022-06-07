@@ -28,23 +28,20 @@
               document.getElementById("psi_header").appendChild(newCol);
             };
             for(let x in psiMetric){
-                //console.log(metricReadings[x])
+                console.log(psiMetric[x])
                 var newCol = document.createElement("th");
                 var newRow = document.createElement("tr");
                 var newCell = document.createElement("td");               
                 newCell.innerHTML = x;
-                newRow.append(newCell);   
-                for (metric in metricReadings){
-                  //console.log(metricReadings[metric]);
-                  for (value in metricReadings[metric]){
-                    // newCell.innerHTML = metricReadings[metric][value];
-                    // newRow.append(newCell);
-                    // console.log(metricReadings[metric][value]);
-                  };                              
+                newRow.append(newCell);
+                for (metric in psiMetric[x]){
+                  console.log(psiMetric[x][metric]);
+                  newCell.append(psiMetric[x][metric]);
+                  
                   };
-                  document.getElementById("index_row").appendChild(newRow);
-                };                            
-                
+                  
+                  document.getElementById("index_row").append(newCell);
+                };                           
             };
             
             
