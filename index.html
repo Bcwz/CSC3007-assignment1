@@ -35,12 +35,15 @@
                 newCell.innerHTML = x;
                 newRow.append(newCell);
                 for (metric in psiMetric[x]){
-                  console.log(psiMetric[x][metric]);
-                  newCell.append(psiMetric[x][metric]);
-                  
+                    console.log(psiMetric[x][metric]);
+                    newCell = document.createElement("td");            
+                    
+                    newCell.append(psiMetric[x][metric]);
+                    newRow.append(newCell);
+                    //document.getElementById("index_row").append(newCell);
                   };
                   
-                  document.getElementById("index_row").append(newCell);
+                  document.getElementById("index_row").append(newRow);
                 };                           
             };
             
